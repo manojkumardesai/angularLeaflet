@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ArcgisService } from './arcgis.service';
+
 declare let L;
 
 @Component({
@@ -8,23 +10,52 @@ declare let L;
 })
 export class AppComponent implements OnInit {
   title = 'dmat';
+  imageLayer;
 
-  constructor() {
+  constructor(public arcgis: ArcgisService) {
   }
 
   ngOnInit() {
     const map = L.map('map').setView([40.65, -74.57], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      // tslint:disable-next-line
+      attribution: "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
     }).addTo(map);
-
-    let imageUrl = "https://vzwdt.com/DMATDEV/arcgisbd/rest/services/Point_FGDB_Hex/MapServer/export?bbox=-8321707.934923685%2C4950398.029786348%2C-8285132.816889278%2C4967175.957494922&bboxSR=102100&imageSR=102100&size=1914%2C878&dpi=96&format=png32&transparent=true&dynamicLayers=%5B%7B%22id%22%3A1%2C%22source%22%3A%7B%22mapLayerId%22%3A1%2C%22type%22%3A%22mapLayer%22%7D%2C%22definitionExpression%22%3A%22AQewrgLgNglgpgJ2AXmABmAQwHYBNQBmBAznBCulnsLgLYD6EMtcxEmtADsAEICiAFQDqfPgDlgAcgBMaAIwBOALRoAHCrmTgAQTEARKbMUr1AZk3Aq%2BAMZwoUYjAhxgMYsAgIwLnPgAUAEoAygEACkoAMgJ8odbWAcQInADaaAC6ru7YIOTYYPYANMBQcADmcHjuMNjAyQDeCDjlAFxYAG6ImOXAAHyoSgBsAOzAAGSj7Z3dADzoRdYgUCAIrQDEaAMALANwAwC%2BBQ1NcK2YHY3dfcBKqiPjkxcus4ND84vLa9twm3KYB0fYFoPLouK5KBTSMYTM5TJ7XW5vJYrYCrIgETAAVmk-0agJOwMu-TkaAw9xhj2AzwhiI%2BKKImJJOOOp3OIN6RLUUIJcKUxLQNORqzguAxACMFKKmXiWbD2dc5HJNlzyWznsTVAK1gRGYdcUCVYT5dJIWTWTN5YrNSihhs4ENsbrmdy5bzVKToWaeXJjVb1oy0gBKKw0BBtNiYBDkVASYO4EC0TDVZBtABeAHdcBAAHQLWjB6q4OAADwAYvAoLhkHRMBAgA%22%7D%5D&f=image";
-    const imageBounds = [[40.578705561124856, -74.75517427920646], [40.69308042301413, -74.42661440371863]];
-    L.imageOverlay(imageUrl, imageBounds).addTo(map);
-    console.log(map.getZoom());
+    this.addImageLayer(map);
     const mapClone = map;
-    map.on('zoomend', function(ev) {
-      console.log(mapClone.getZoom());
-  });
+    map.on('zoomend', (ev) => {
+      this.addImageLayer(map);
+    });
+    map.on('moveend', (ev) => {
+      this.addImageLayer(map);
+    });
+  }
+
+  addImageLayer(map) {
+    // tslint:disable-next-line
+    let boundaries = [map.getBounds()._southWest.lng, map.getBounds()._southWest.lat, map.getBounds()._northEast.lng, map.getBounds()._northEast.lat];
+    // tslint:disable-next-line
+    const imageBounds = [[map.getBounds()._southWest.lat, map.getBounds()._southWest.lng], [map.getBounds()._northEast.lat, map.getBounds()._northEast.lng]];
+    const body = {
+      'bbox': boundaries.toString(),
+      'bboxSR': 102100,
+      'imageSR': 102100,
+      'size': '1673,856',
+      'dpi': 86.39999771118164,
+      'format': 'png32',
+      'transparent': true,
+      // tslint:disable-next-line
+      'dynamicLayers': [{ "id": 1, "source": { "mapLayerId": 1, "type": "mapLayer" }, "definitionExpression": "CYUwZgogHgDgksABAXkQJgIwBYCcB2RAeQFcAXAGwEsQAnFRABkQEMA7JAezDAGcRT6TFu0Q9KpEK2YBbEDwAWHAO70MAZkTCkABQByC5ao1bEAYxDlyAZXEgAKiFPzWHchwDmAT3pYA4prYkADcGUKZKHkRSGmIQE3NLK1ogylZ3egMVQLMLcl0QSnd5ACMOOlRM+NzCUnlaDMUskWBpAH1SSlkeUhkYRAAhCDsAdQgIXUQAcjQGDBwAWgYF2cnEAEFdABEpmbnFhbUGVarE203mCRRp2eWDo80T8jFLiKiYuJMQIMkBVMQACgAMnYIAAlOQWOwcXw8aQAVWkpB4ADFmJRyAAaYFgiHkZE0DjSGHwxEotGY7HaYCscEAKyxIKSNBS5jpDKGzDZ2IAshxiujxJ58YSIGQaMxUej2YQODx2aCaKYAMIcGkgenYmzFcHMYCS8jEGggdkANQ42M2BJg8vIYHlipVau6XJBcFY0U5uP17LWpFILogbo9AAkON7sWsyPIA2aI6UaKQAJQBEQA7RKuDzSmmUzaUyUADaDAAuohXi4BKxiJYMYhyCB3JJgJE-gWAN5BZgGkAALkY0g4SAArBg0LXTK4yn2AMQADjQOFwWAAvhiO13Yn2MAPh6Px5OaDOIGs0P0GGpV+vu1uGDvECOx2YDzPNrP+jgh3hL53r4gMKE7wffc3EPRBpzUNY1CVIdZ2-Ddez-WZAL3J8QJfAA2NY336ODf3-NBkMfCc0LA2dZ2wZFNlwzdELUQjgKnMDPzWdCsHQ6iEP-LB6NQxjwNnCAGFnC81x-Gj-yHHjiL4jAh1wZEv1E+Cb3QqTn1IpYMDwESr3Ehg8DUkjp36JU2IYCAOJvWdDL4pVNjQCAYMsxCcBs0DpxgiCsAspS8O3Qd7xQ6T3ORCB-0o5yMH-NyZyHNQcAwWc1kiqKYrA5EovQpUlRSgiAqA3j3KHRdNiwHSxM49Q0unBKwpwHDfPE7BqogLAyvfFLJPyoL1PApUxhmFLVO6ojerIvBNhwHzdMqgyRoY9zZLWEyGBS6z5sKmd+vq2chxS1yNuC2KsHfIdksazi8t3UajOg-pkX6crlL-GZqtM9C8CHdiLq3TBqvQx7drQSK0CuwKbtshgHPMkG6MO3rZORSicp+l7uPhoy4tmVqQa666FpndCcE2NYYdR0dhvxzawPq0r+nOmbfrmqmjrAvAGGRLKcBB9aWd6w4sAwTYnrwhdqvPNQ1EFyK4b5oyGH6R7Fxl28Mb45asKHPbybUfy5b4ocxkw4GdbBh8gA" }],
+      'f': 'image'
+    };
+    this.drawCellSite(map, body, imageBounds);
+  }
+
+  drawCellSite(map, body, imageBounds) {
+    // tslint:disable-next-line
+    if (map.hasLayer(this.imageLayer)) {
+      map.removeLayer(this.imageLayer);
+    }
+    this.imageLayer = L.imageOverlay('http://localhost:9000/cellsite/export?text=' + JSON.stringify(body), imageBounds).addTo(map);
   }
 }
