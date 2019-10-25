@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
 
   addLayerCalls(map) {
     this.addImageLayerCellSite(map);
-    // this.addImageLayerHex(map);
+    this.addImageLayerHex(map);
   }
 
   addImageLayerCellSite(map) {
