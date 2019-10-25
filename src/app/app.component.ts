@@ -10,7 +10,8 @@ declare let L;
 })
 export class AppComponent implements OnInit {
   title = 'dmat';
-  imageLayer;
+  imageLayerCellSite;
+  imageLayerHex;
 
   constructor(public arcgis: ArcgisService) {
   }
@@ -21,17 +22,22 @@ export class AppComponent implements OnInit {
       // tslint:disable-next-line
       attribution: "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
     }).addTo(map);
-    this.addImageLayer(map);
+    this.addLayerCalls(map);
     const mapClone = map;
     map.on('zoomend', (ev) => {
-      this.addImageLayer(map);
+      this.addLayerCalls(map);
     });
     map.on('moveend', (ev) => {
-      this.addImageLayer(map);
+      this.addLayerCalls(map);
     });
   }
 
-  addImageLayer(map) {
+  addLayerCalls(map) {
+    this.addImageLayerCellSite(map);
+    this.addImageLayerHex(map);
+  }
+
+  addImageLayerCellSite(map) {
     // tslint:disable-next-line
     let boundaries = [map.getBounds()._southWest.lng, map.getBounds()._southWest.lat, map.getBounds()._northEast.lng, map.getBounds()._northEast.lat];
     // tslint:disable-next-line
@@ -50,12 +56,39 @@ export class AppComponent implements OnInit {
     };
     this.drawCellSite(map, body, imageBounds);
   }
+  addImageLayerHex(map) {
+    // tslint:disable-next-line
+    let boundaries = [map.getBounds()._southWest.lng, map.getBounds()._southWest.lat, map.getBounds()._northEast.lng, map.getBounds()._northEast.lat];
+    // tslint:disable-next-line
+    const imageBounds = [[map.getBounds()._southWest.lat, map.getBounds()._southWest.lng], [map.getBounds()._northEast.lat, map.getBounds()._northEast.lng]];
+    const body = {
+      'bbox': boundaries.toString(),
+      'bboxSR': 102100,
+      'imageSR': 102100,
+      'size': '1673,856',
+      'dpi': 86.39999771118164,
+      'format': 'png32',
+      'transparent': true,
+      // tslint:disable-next-line
+      "dynamicLayers": [{"id":1,"source":{"mapLayerId":1,"type":"mapLayer"},"definitionExpression":"AQewrgLgNglgpgJ2AXmABmAQwHYBNQBmBAznBCulnsLgLYD6EMtcxEmtADsAEICiAFQDqfPgDlgAcgBMaAIwBOALRy0StAHZJwAIJiAIlNmKVauQGZtVfAGM4UKMRgQ4wGMWAQEYVznxRMcmQAFjQAOgA2YIjpAFY0WIVrYCgQbAolDWDItAiFRIAOc2SACgAlAGUygAUlABkBPmqbGzLiBE4AbTQAXTcPbBBybDAHABoUuABzODwPGHTOgG8EHBmALiwAN0RMGeAAPlQlCI1gADJz7d39gB50CZsQVIRNgGJc6LgIgF8xlbWcE2mB2q32R2ASgKZ0u1zBrnuJw0j2eIFewDeX2CckwfwB2A2cL2rghSgU0guVxBNwRkOhKJe7yIBEwsWkeNWBKBRPBx1UGFh1PhwER5IZaKZLPiaA5gOBoOJhz5aAKlJ5tNMaHF6LecFwsQARgoDbKufKaUrIXI5ME1ULFYjVAVtUy0DL-pzCfbeVbpBTBQq7labS6MRpcnANOyPXL1ZaVAUBVTAxq5H7Qx83T8egBKZK4BBbNiYBBBYASfMgWiYBbILYALwA7rgIGEnrRkgtcHAAB4AMXgUFwyDogSAA"}],
+      'f': 'image'
+    };
+    this.drawHex(map, body, imageBounds);
+  }
 
   drawCellSite(map, body, imageBounds) {
     // tslint:disable-next-line
-    if (map.hasLayer(this.imageLayer)) {
-      map.removeLayer(this.imageLayer);
+    if (map.hasLayer(this.imageLayerCellSite)) {
+      map.removeLayer(this.imageLayerCellSite);
     }
-    this.imageLayer = L.imageOverlay('http://localhost:9000/cellsite/export?text=' + JSON.stringify(body), imageBounds).addTo(map);
+    this.imageLayerCellSite = L.imageOverlay('http://localhost:9000/cellsite/export?text=' + JSON.stringify(body), imageBounds).addTo(map);
+  }
+
+  drawHex(map, body, imageBounds) {
+    // tslint:disable-next-line
+    if (map.hasLayer(this.imageLayerHex)) {
+      map.removeLayer(this.imageLayerHex);
+    }
+    this.imageLayerHex = L.imageOverlay('http://localhost:9000/hex/export?text=' + JSON.stringify(body), imageBounds).addTo(map);
   }
 }
