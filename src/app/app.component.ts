@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
 
   addLayerCalls(map) {
     this.addImageLayerCellSite(map);
-    this.addImageLayerHex(map);
+    // this.addImageLayerHex(map);
   }
 
   addImageLayerCellSite(map) {
@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
       'format': 'png32',
       'transparent': true,
       // tslint:disable-next-line
-      'dynamicLayers': [{ "id": 1, "source": { "mapLayerId": 1, "type": "mapLayer" }, "definitionExpression": "CYUwZgogHgDgksABAXkQJgIwBYCcB2RAeQFcAXAGwEsQAnFRABkQEMA7JAezDAGcRT6TFu0Q9KpEK2YBbEDwAWHAO70MAZkTCkABQByC5ao1bEAYxDlyAZXEgAKiFPzWHchwDmAT3pYA4prYkADcGUKZKHkRSGmIQE3NLK1ogylZ3egMVQLMLcl0QSnd5ACMOOlRM+NzCUnlaDMUskWBpAH1SSlkeUhkYRAAhCDsAdQgIXUQAcjQGDBwAWgYF2cnEAEFdABEpmbnFhbUGVarE203mCRRp2eWDo80T8jFLiKiYuJMQIMkBVMQACgAMnYIAAlOQWOwcXw8aQAVWkpB4ADFmJRyAAaYFgiHkZE0DjSGHwxEotGY7HaYCscEAKyxIKSNBS5jpDKGzDZ2IAshxiujxJ58YSIGQaMxUej2YQODx2aCaKYAMIcGkgenYmzFcHMYCS8jEGggdkANQ42M2BJg8vIYHlipVau6XJBcFY0U5uP17LWpFILogbo9AAkON7sWsyPIA2aI6UaKQAJQBEQA7RKuDzSmmUzaUyUADaDAAuohXi4BKxiJYMYhyCB3JJgJE-gWAN5BZgGkAALkY0g4SAArBg0LXTK4yn2AMQADjQOFwWAAvhiO13Yn2MAPh6Px5OaDOIGs0P0GGpV+vu1uGDvECOx2YDzPNrP+jgh3hL53r4gMKE7wffc3EPRBpzUNY1CVIdZ2-Ddez-WZAL3J8QJfAA2NY336ODf3-NBkMfCc0LA2dZ2wZFNlwzdELUQjgKnMDPzWdCsHQ6iEP-LB6NQxjwNnCAGFnC81x-Gj-yHHjiL4jAh1wZEv1E+Cb3QqTn1IpYMDwESr3Ehg8DUkjp36JU2IYCAOJvWdDL4pVNjQCAYMsxCcBs0DpxgiCsAspS8O3Qd7xQ6T3ORCB-0o5yMH-NyZyHNQcAwWc1kiqKYrA5EovQpUlRSgiAqA3j3KHRdNiwHSxM49Q0unBKwpwHDfPE7BqogLAyvfFLJPyoL1PApUxhmFLVO6ojerIvBNhwHzdMqgyRoY9zZLWEyGBS6z5sKmd+vq2chxS1yNuC2KsHfIdksazi8t3UajOg-pkX6crlL-GZqtM9C8CHdiLq3TBqvQx7drQSK0CuwKbtshgHPMkG6MO3rZORSicp+l7uPhoy4tmVqQa666FpndCcE2NYYdR0dhvxzawPq0r+nOmbfrmqmjrAvAGGRLKcBB9aWd6w4sAwTYnrwhdqvPNQ1EFyK4b5oyGH6R7Fxl28Mb45asKHPbybUfy5b4ocxkw4GdbBh8gA" }],
+      'dynamicLayers': [{"id":1,"source":{"mapLayerId":1,"type":"mapLayer"},"definitionExpression":"CYUwZgogHgDgksABAXkQJgIwFYAMXEDyArgC4A2AliAE4qI6ICGAdkgPZhgDOIJdDTVoi4USIZowC2ILgAs2AdzoYAzIkFIACgDk5i5Wo2IAxiDJkAyqJAAVEMdnM2ZNgHMAnnQAsAcXUskADccEIYKLkQSaiIQI1NzCxpAimZXOj0lAJMzMm0QCldZACM2WlQMuJyCElkaOlkKUCNgSQB9EgppLhIpGEQAIQgbAHUICG1EAHI0HAwATgBaHAAOJYxJxABBbQARKZn5pdWVdf8heMtrHcYxFGnZxZWFk42zpAuRW-DI6NijEEC4j4KUQAAoADI2CAAJRkZhsbB8XEkAFVJCQuAAxRgUMgAGkhMLhZEx1DYkiRqPRWJx+MJmmAzFhACsCVDEtRkqYWWyhoweYSALJsIq40TuUnkiCkaiMbG43kENhcXnQ6jGADCbCZIFZhKsRVhjGA8rIRGoIF5ADU2ISdmSYKqyGBVeqtTrugKoXBmFF+cTTbzNiQSF6ID6-QAJNiBwmbUiyMM2uMlagkACUb3UoM0GrgC3pxmMmmMFAA2jgALqIb5OPjMIjmPGIMggVziYAREFlgDegUYZpAAC56JI2EgsBg0M3jM5SiOAMTLNBzLyrgC+eL7A5iI4wY4nU5nc+oi4gmzQ-RwKk328He5wB8Qk+nJhPi52y36cywAHZb-296IBgIRPi+x4uKeiALiomwqBqWDLABO7DsBsxgUeb6QR+ABsmxfv0yFASBaAYa+s7YdByzLBgXiYjsRG7mhKhkRB87QX+mw4V4OGMahIFeKxWHsTBywQCsN5boBTEgVgQkUSJ2Brpi-5SShD44fJ75UTgcwYL+kl3jJOC-lplELv0Go8TgEB8Q+yxmSJGo7GgECIXZaFzI5UELohsFeLZanEfu47PphCk+ZiEAgfRHkYCB3mLlgKh6csmxxfFiXQZi8U4RqGoZaRoXgcJPlYKuOxeIZ0n8aoWULnp0VzIRQUybR9UQF4VXfhlcnFeF2kwRqYwzBlmn9eRg3Ub+OxzIFRm1aZE1sT52CbJZOAZQ5y2lYuw3NcsWAZV5O0RUlXjflg6WtfxRWHpN5kIf0mL9NV6nATM9VWThv5YLxN17pg9U4a9h1oHFaB3WFD1OTgrk2RDLGnYN2CYvRBUAx9gnI+ZyWzJ1EN9fdK2Ljhcw7JsCOY1O43E7t0HNZV-TXQtgNLXTZ3Qb+OCYnlcwQ9tHODSoOBeBgOxvcRK71deKgqGLcVI0L5k4P0r0btTIv1et+FYEdmshcrIlYGMeHg5rUMvkAA"}],
       'f': 'image'
     };
     this.drawCellSite(map, body, imageBounds);
@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
       'format': 'png32',
       'transparent': true,
       // tslint:disable-next-line
-      "dynamicLayers": [{"id":1,"source":{"mapLayerId":1,"type":"mapLayer"},"definitionExpression":"AQewrgLgNglgpgJ2AXmABmAQwHYBNQBmBAznBCulnsLgLYD6EMtcxEmtADsAEICiAFQDqfPgDlgAcgBMaAIwBOALRy0StAHZJwAIJiAIlNmKVauQGZtVfAGM4UKMRgQ4wGMWAQEYVznxRMcmQAFjQAOgA2YIjpAFY0WIVrYCgQbAolDWDItAiFRIAOc2SACgAlAGUygAUlABkBPmqbGzLiBE4AbTQAXTcPbBBybDAHABoUuABzODwPGHTOgG8EHBmALiwAN0RMGeAAPlQlCI1gADJz7d39gB50CZsQVIRNgGJc6LgIgF8xlbWcE2mB2q32R2ASgKZ0u1zBrnuJw0j2eIFewDeX2CckwfwB2A2cL2rghSgU0guVxBNwRkOhKJe7yIBEwsWkeNWBKBRPBx1UGFh1PhwER5IZaKZLPiaA5gOBoOJhz5aAKlJ5tNMaHF6LecFwsQARgoDbKufKaUrIXI5ME1ULFYjVAVtUy0DL-pzCfbeVbpBTBQq7labS6MRpcnANOyPXL1ZaVAUBVTAxq5H7Qx83T8egBKZK4BBbNiYBBBYASfMgWiYBbILYALwA7rgIGEnrRkgtcHAAB4AMXgUFwyDogSAA"}],
+      'dynamicLayers': [{"id":1,"source":{"mapLayerId":1,"type":"mapLayer"},"definitionExpression":"AQewrgLgNglgpgJ2AXmABmAQwHYBNQBmBAznBCulnsLgLYD6EMtcxEmtADsAEICiAFQDqfPgDlgAcgBMaAIwBOALRy0StAHZJwAIJiAIlNmKVauQGZtVfAGM4UKMRgQ4wGMWAQEYVznxRMcmQAFjQAOgA2YIjpAFY0WIVrYCgQbAolDWDItAiFRIAOc2SACgAlAGUygAUlABkBPmqbGzLiBE4AbTQAXTcPbBBybDAHABoUuABzODwPGHTOgG8EHBmALiwAN0RMGeAAPlQlCI1gADJz7d39gB50CZsQVIRNgGJc6LgIgF8xlbWcE2mB2q32R2ASgKZ0u1zBrnuJw0j2eIFewDeX2CckwfwB2A2cL2rghSgU0guVxBNwRkOhKJe7yIBEwsWkeNWBKBRPBx1UGFh1PhwER5IZaKZLPiaA5gOBoOJhz5aAKlJ5tNMaHF6LecFwsQARgoDbKufKaUrIXI5ME1ULFYjVAVtUy0DL-pzCfbeVbpBTBQq7labS6MRpcnANOyPXL1ZaVAUBVTAxq5H7Qx83T8egBKZK4BBbNiYBBBYASfMgWiYBbILYALwA7rgIGEnrRkgtcHAAB4AMXgUFwyDogSAA"}],
       'f': 'image'
     };
     this.drawHex(map, body, imageBounds);
@@ -81,7 +81,7 @@ export class AppComponent implements OnInit {
     if (map.hasLayer(this.imageLayerCellSite)) {
       map.removeLayer(this.imageLayerCellSite);
     }
-    this.imageLayerCellSite = L.imageOverlay('http://localhost:9000/cellsite/export?text=' + JSON.stringify(body), imageBounds).addTo(map);
+    this.imageLayerCellSite = L.imageOverlay(`http://localhost:9000/cellsite/export?text=${JSON.stringify(body)}`, imageBounds).addTo(map);
   }
 
   drawHex(map, body, imageBounds) {
