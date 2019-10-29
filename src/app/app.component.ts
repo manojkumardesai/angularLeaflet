@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
       'format': 'png32',
       'transparent': true,
       // tslint:disable-next-line
-      'dynamicLayers': [{"id":1,"source":{"mapLayerId":1,"type":"mapLayer"},"definitionExpression":"AQewrgLgNglgpgJ2AXmABmAQwHYBNQBmBAznBCulnsLgLYD6EMtcxEmtADsAEICiAFQDqfPgDlgAcgBMaAIwBOALRy0StAHZJwAIJiAIlNmKVauQGZtVfAGM4UKMRgQ4wGMWAQEYVznxRMcmQAFjQAOgA2YIjpAFY0WIVrYCgQbAolDWDItAiFRIAOc2SACgAlAGUygAUlABkBPmqbGzLiBE4AbTQAXTcPbBBybDAHABoUuABzODwPGHTOgG8EHBmALiwAN0RMGeAAPlQlCI1gADJz7d39gB50CZsQVIRNgGJc6LgIgF8xlbWcE2mB2q32R2ASgKZ0u1zBrnuJw0j2eIFewDeX2CckwfwB2A2cL2rghSgU0guVxBNwRkOhKJe7yIBEwsWkeNWBKBRPBx1UGFh1PhwER5IZaKZLPiaA5gOBoOJhz5aAKlJ5tNMaHF6LecFwsQARgoDbKufKaUrIXI5ME1ULFYjVAVtUy0DL-pzCfbeVbpBTBQq7labS6MRpcnANOyPXL1ZaVAUBVTAxq5H7Qx83T8egBKZK4BBbNiYBBBYASfMgWiYBbILYALwA7rgIGEnrRkgtcHAAB4AMXgUFwyDogSAA"}],
+      'dynamicLayers': [{"id":1,"source":{"mapLayerId":1,"type":"mapLayer"},"definitionExpression":"AQewrgLgNglgpgJ2AXmABmAQwHYBNQBmBAznBCsAExoY764C2A+hDA3MRJgwA7ABCAUQAqAdUGCAcsADk1AIwBOALRoA7KvkzgAQUkARWQpVoVAZjTaseYAGM4UKMRgQ4wGMWAQEYN3WAAFABKAMpBAArKADLCguG2tkHECDwA2mgAuu6e2CDk2GCOADTAUHAA5nB4njDYwKkA3gg4lQBcWABuiJiVwAB8qMoAbGrAAGRjnd29ADzoJbYgUCAI7QDEaEMALENwQwC+RU0tcO2YXc29A8DKAByjE1OXbnPDagtLK+s7cFvymIdjtg2k8em5rspFJRxpNztMXjd7h9lqtgGsiARMABWSiA5rA06gq6DeQ0GFEhGQyjIr5oojYmh4k5nC5g-oktC3clw57AV6ktA01FrOC4LEAI0U4qZBJZ8PZN3k8i23NZs0VnKF6wIjKO+JBPLZEPklGhj0N6uUSq2WrRak2cDUuL1zIpCqttww5rVlJN1Lsn2FNDQ+wyAEprPQEB1OJgEORUNJI8BcCAGJhasgOgAvADuuAgADpFgxk7VcHAAB4AMXgUFwyEYmAgQA"}],
       'f': 'image'
     };
     this.drawHex(map, body, imageBounds);
